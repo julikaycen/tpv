@@ -1,6 +1,6 @@
 <?php
 
-   echo("Hola Mundo cruel")\n;
+   echo("Hola Mundo cruel \n");
 
    var_dump("hola");
 
