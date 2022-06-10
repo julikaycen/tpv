@@ -1,7 +1,7 @@
 <?php
 
-   echo("Hola Mundo cruel \n");
+   echo("Hola Mundo cruel ");
 
-   var_dump("hola");
+   var_dump(100.56);
 
 ?>
