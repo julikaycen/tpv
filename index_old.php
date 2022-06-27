@@ -64,9 +64,11 @@
     comprobar_ticket();
     comprobar_ticket();
 
-
+    mesas.php?mesa=<?php echo $_GET['mesa'];?>
+    ?categoria_id=<?php echo $_GET['categoria_id'];?>
+    <?=$ticket['precio_id'];?>
     
-
+    tickets.mesa_id AS mesa,
     
 
     

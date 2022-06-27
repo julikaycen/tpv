@@ -5,7 +5,7 @@
         'host' => 'localhost',
 		'database' => 'tpv',
 		'user' => 'administrador_tpv',
-		'password' => 'password',
+		'password' => 'password'
 
 	);
 

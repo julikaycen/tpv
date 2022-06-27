@@ -1,9 +1,11 @@
 <?php
 
 namespace app\Controllers; // ruta carpeta
+//
+require_once 'app/Models/Table.php'; // archivo
+use app\Models\Table; // modelo - objeto
 
-require_once 'app/Models/Table.php';
-use app\Models\Table;
+
 
 
 class TableController {
