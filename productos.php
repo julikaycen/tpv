@@ -1,9 +1,17 @@
 <?php
+// 
     require_once 'app/Controllers/ProductoController.php'; // nombre del archivo
     use app\Controllers\ProductoController; // nombre del objeto o clase
 
     $cat = new ProductoController();
     $cats = $cat->index($_GET['categoria_id']);
+
+    // productos categorias
+    require_once 'app/Controllers/ProductCategoryController.php'; // nombre del archivo
+    use app\Controllers\ProductCategoryController; // nombre del objeto o clase
+
+    $kat = new ProductCategoryController();
+    $kats = $kat->index();
 
    
 ?>
@@ -30,7 +38,9 @@
             </div>
             <div class="col-12 col-lg-7 col-xl-8 order-lg-1 mt-5">
                 <section>
-                    <h2 class="text-center">TAPAS</h2>
+                    <?php foreach($kats as $kat):?>
+                     <h2 class="text-center"><?=$kat['nombre'];?></h2> <!-- TAPAS -->
+                    <?php endforeach;?> 
                     <div class="row">
                         <div class="col">
                             <ol class="breadcrumb mb-0 mt-3">

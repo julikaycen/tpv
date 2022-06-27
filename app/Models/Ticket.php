@@ -7,7 +7,7 @@ use PDO;
 use core\Connection;
 
 // globals
-$mesaID = 2;
+$mesaID = 1;
 
 class Ticket extends Connection{
 
