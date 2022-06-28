@@ -1,0 +1,7 @@
+SELECT * FROM ventas
+                    --INNER JOIN tickets ON ventas.id = tickets.venta_id
+                    --INNER JOIN mesas ON tickets.mesa_id = mesas.id
+                    --INNER JOIN metodos_pagos ON ventas.metodo_pago.id = metodos_pagos.id
+                    --GROUP BY ventas.id
+                    
+        

@@ -73,6 +73,8 @@
                 productos ON productos.categoria_id = productos_catgorias.id
 
                 WHERE productos.visible=1
+
+    <?php foreach($kats as $kat):?>
     
 
     

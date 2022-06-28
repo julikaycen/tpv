@@ -10,6 +10,7 @@ class TicketsController {
 	protected $ticket;
     protected $precio;
 	protected $total;
+	//
 
 	public function __construct(){  
 
@@ -18,14 +19,14 @@ class TicketsController {
 		$this->total = new Ticket();
 	}
 
-	public function index(){
-		return $this->ticket->index();
+	public function index($mesaID){
+		return $this->ticket->index($mesaID);
 	}
-	public function get_prize(){
-		return $this->precio->get_prize();
+	public function get_prize($mesaID){
+		return $this->precio->get_prize($mesaID);
 	}
-	public function get_total(){
-		return $this->total->get_total();
+	public function get_total($mesaID){
+		return $this->total->get_total($mesaID);
 	}
 }
 

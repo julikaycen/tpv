@@ -3,15 +3,12 @@
     use app\Controllers\TicketsController; // nombre del objeto o clase
     
     $ticket = new TicketsController();
-    $tickets = $ticket->index();
 
-    $precio = new TicketsController();
-    $precios = $precio->get_prize();
-
-    $total = new TicketsController();
-    $totales = $total->get_total();
-    
-    
+    if(!empty($_GET['mesa'])){
+        $tickets = $ticket->index($_GET['mesa']);
+        $precios = $ticket->get_prize($_GET['mesa']);
+        $totales = $ticket->get_total($_GET['mesa']);
+    }
 ?>
 
 
@@ -20,17 +17,16 @@
         <h2 class="text-center">TICKET MESA <?php echo $num_mesa = isset($_GET['mesa']) ? $_GET['mesa'] : "-";?></h2>
         <ul class="list-group shadow mt-4">
 
-        
-            <?php foreach($tickets as $ticket):?> 
-                <?php if(isset($_GET['mesa'])):?>
-                <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
-                    <div class="flex-grow-1"><span class="categoria-prod"><?=$ticket['categoria'];?></span>
-                        <h4 class="nombre-prod mb-0"><?=$ticket['pro_nombre'];?></h4>
-                    </div>
-                    <p class="precio-prod"><?=$ticket['precio_pro'];?></p>
-                </li>
-                <?php endif;?>
-            <?php endforeach;?>
+            <?php if(isset($tickets)):?>
+                <?php foreach($tickets as $ticket):?> 
+                    <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
+                        <div class="flex-grow-1"><span class="categoria-prod"><?=$ticket['categoria'];?></span>
+                            <h4 class="nombre-prod mb-0"><?=$ticket['pro_nombre'];?></h4>
+                        </div>
+                        <p class="precio-prod"><?=$ticket['precio_pro'];?></p>
+                    </li>
+                <?php endforeach;?>
+            <?php endif;?>
         
             <!-- <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/heineken.jpeg">
                 <div class="flex-grow-1"><span class="categoria-prod">Bebida alcohólica</span>

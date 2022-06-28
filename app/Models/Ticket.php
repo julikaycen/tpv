@@ -6,16 +6,11 @@ require_once 'core/Connection.php';
 use PDO;
 use core\Connection;
 
-// globals
-$mesaID = 1;
 
 class Ticket extends Connection{
 
-
-
-	public function index(){
+	public function index($mesaID){
         // crear consulta para cada registro del ticket
-                global $mesaID;
                 $query = "SELECT
                         tickets.mesa_id AS mes_id,
                         productos.nombre AS pro_nombre,
@@ -39,7 +34,7 @@ class Ticket extends Connection{
 
 
         // base imponible
-        public function get_prize()
+        public function get_prize($mesaID)
         {
                 global $mesaID;
                 $query = "SELECT
@@ -56,7 +51,8 @@ class Ticket extends Connection{
         }
         
         // total con iva incluido
-        public function get_total()
+        
+        public function get_total($mesaID)
         {
                 global $mesaID;
                 $query = "SELECT
