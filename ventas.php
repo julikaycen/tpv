@@ -45,11 +45,11 @@
                                     <h5 class="card-title">Datos de la venta</h5>
                                     <p class="card-text">
                                         
-                                            <strong>Mesa:</strong><?php if(isset($_GET['venta'])):?><?php echo $_GET['mesa'];?><?php endif;?><br>
-                                            <strong>Método de pago: <?php if(isset($_GET['venta'])):?><?php echo $_GET['met_pag'];?><?php endif;?></strong><br>
-                                            <strong>Total base:</strong> <?php if(isset($_GET['venta'])):?><?php echo $_GET['p_base'];?><?php endif;?> €<br>
-                                            <strong>Total IVA:</strong> <?php if(isset($_GET['venta'])):?><?php echo $_GET['p_iva'];?><?php endif;?> €<br>
-                                            <strong>Total:</strong> <?php if(isset($_GET['venta'])):?><?php echo $_GET['p_total'];?><?php endif;?> €
+                                        <strong>Mesa:</strong><?php if(isset($_GET['venta'])):?><?php echo $_GET['mesa'];?><?php endif;?><br>
+                                        <strong>Método de pago: <?php if(isset($_GET['venta'])):?><?php echo $_GET['met_pag'];?><?php endif;?></strong><br>
+                                        <strong>Total base:</strong> <?php if(isset($_GET['venta'])):?><?php echo $_GET['p_base'];?><?php endif;?> €<br>
+                                        <strong>Total IVA:</strong> <?php if(isset($_GET['venta'])):?><?php echo $_GET['p_iva'];?><?php endif;?> €<br>
+                                        <strong>Total:</strong> <?php if(isset($_GET['venta'])):?><?php echo $_GET['p_total'];?><?php endif;?> €
                                         
                                     </p>
                                 </div>
