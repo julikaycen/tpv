@@ -3,7 +3,11 @@
     use app\Controllers\VentasController; // nombre del objeto o clase
 
     $venta = new VentasController();
-    $ventas = $venta->index($_GET['fecha'],$_GET['mesa']);
+    if(!empty($_GET['fecha']) || !empty($_GET['mesa'])){
+        $ventas = $venta->index($_GET['fecha'],$_GET['mesa']);
+    }
+    
+    
     
 
     if(!empty($_GET['venta'])){
@@ -45,7 +49,6 @@
                     
                     <h2 class="text-center">VENTA <?php if(isset($_GET['venta'])):?><?php echo $detalles['numero_ticket'];?><?php endif;?></h2>
                     
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -147,6 +150,7 @@
 
 
                     <div class="list-group">
+                    <?php if(!empty($_GET['fecha']) || !empty($_GET['mesa'])):?>
                         <?php foreach($ventas as $venta):?> 
                             <?php if(isset($_GET['venta']) && $_GET['venta'] == $venta['id']):?>
                                 <a class="sale-item list-group-item list-group-item-action active" href="ventas.php?venta=<?php echo $venta['id'];?>" aria-current="true">
@@ -168,6 +172,7 @@
                                 </a>
                             <?php endif;?>
                         <?php endforeach;?>    
+                    <?php endif;?>
                         <!-- <a class="sale-item list-group-item list-group-item-action" href="ventas.php?venta=2" aria-current="true">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Ticket: 202206280002</h5>

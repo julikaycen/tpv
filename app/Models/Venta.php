@@ -10,13 +10,40 @@ use core\Connection;
 class Venta extends Connection{
 
 	public function index($fecha,$mesa){
-                
-                $query = "SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva  
-                FROM ventas INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id";
-                
-                
+                               
+                if($fecha && !$mesa) // solo fecha
+                {
+                        $query = "SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva,
+                        mesas.numero AS mesa_numero, ventas.fecha_emision  
+                        FROM ventas 
+                        INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id
+                        INNER JOIN mesas ON ventas.mesa_id = mesas.id
+                                        
+                        WHERE ventas.fecha_emision = '$fecha'"; 
+                }
+                if(!$fecha && $mesa) // solo mesa
+                {
+                        $query = "SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva,
+                        mesas.numero AS mesa_numero, ventas.fecha_emision  
+                        FROM ventas 
+                        INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id
+                        INNER JOIN mesas ON ventas.mesa_id = mesas.id
+                                        
+                        WHERE mesas.numero = $mesa"; 
+                }
+                if($fecha && $mesa) // las 2
+                {
+                        $query = "SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva,
+                        mesas.numero AS mesa_numero, ventas.fecha_emision  
+                        FROM ventas 
+                        INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id
+                        INNER JOIN mesas ON ventas.mesa_id = mesas.id
+                                        
+                        WHERE mesas.numero = $mesa and ventas.fecha_emision = '$fecha'"; 
+                }
 
-
+                
+                                
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
 
@@ -24,6 +51,7 @@ class Venta extends Connection{
 
                 // <?php echo $venta['id']; <?php if(isset($_GET['venta'])): <?php endif;
                 // <?php if(isset($_GET['venta'])): <?php endif;
+                // WHERE mesas.numero = $mesa WHERE ventas.fecha_emision = '$fecha'";
 	}
 
         public function show($arg){
