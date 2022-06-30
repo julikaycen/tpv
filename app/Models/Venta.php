@@ -9,7 +9,7 @@ use core\Connection;
 
 class Venta extends Connection{
 
-	public function index($fecha,$mesa){
+	public function index($fecha,$mesa,$datetime){
                                
                 if($fecha && !$mesa) // solo fecha
                 {
@@ -23,7 +23,7 @@ class Venta extends Connection{
                 }
                 if(!$fecha && $mesa) // solo mesa
                 {
-                        $datetime = date("Y-m-d");
+                        //$datetime = date("Y-m-d");
                         $fecha = $datetime; //"2022-06-30";
                         $query = "SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva,
                         mesas.numero AS mesa_numero, ventas.fecha_emision  
@@ -44,6 +44,7 @@ class Venta extends Connection{
                         WHERE mesas.numero = $mesa and ventas.fecha_emision = '$fecha'"; 
                 }
 
+
                 
                                 
                 $stmt = $this->pdo->prepare($query);
@@ -58,7 +59,7 @@ class Venta extends Connection{
                 // == $_GET['mesa'] ? 'selected' : ''
 	}
 
-        public function show($arg){
+        public function show($arg){ // ojo con estas nomenclaturas
 
                 $query = "SELECT ventas.id, ventas.numero_ticket, metodos_pagos.nombre AS _metodo_pago,ventas.precio_total_base, ventas.precio_total_iva, ventas.precio_total, ventas.mesa_id
                   FROM ventas INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id

@@ -10,7 +10,7 @@
     $table_numbers = $table->index();
 
     if(!empty($_GET['fecha']) || !empty($_GET['mesa'])){
-        $ventas = $venta->index($_GET['fecha'],$_GET['mesa']);
+        $ventas = $venta->index($_GET['fecha'],$_GET['mesa'],date("Y-m-d"));
     }
        
     if(!empty($_GET['venta'])){
@@ -182,12 +182,56 @@
                             </div>
                             <p class="mb-1">72 €</p>
                         </a> -->
+
+                        <!-- PRECIO TOTAL TICKETS DEL DIA -->
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="bg-secondary" id="refresh-price">
+                                <div class="row justify-content-between g-0">
+                                    <div class="col">
+                                        <h5 class="text-center text-white mb-0 pt-1">Total Ingresos</h5>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="text-center text-white mb-0 pt-1">Media del día</h5>
+                                    </div>
+                                    <div class="row justify-content-between g-0">
+                                        <div class="col">
+                                            <h5 class="text-center text-white mb-0 pb-1">
+                                                <?php if(isset($total_ticket['base_imponible']) && $total_ticket['base_imponible'] != null): ?>
+                                                    <?= $total_ticket['base_imponible']; ?> €
+                                                <?php else: ?>
+                                                    0 €
+                                                <?php endif; ?>
+                                            </h5>
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="text-center text-white mb-0 border-start pb-1">
+                                                <?php if(isset($total_ticket['iva']) && $total_ticket['iva'] != null): ?>
+                                                    <?= $total_ticket['rest']; ?> €
+                                                <?php else: ?>
+                                                    0 €
+                                                <?php endif; ?>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- FIN PRECIO TOTAL TICKETS -->
+
+
+                    </div>
+
                 </aside>
             </div>
 
         </div>
     </div>
+
+
+    
+
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

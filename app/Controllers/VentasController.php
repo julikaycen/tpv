@@ -22,8 +22,8 @@ class VentasController {
 		$this->productos_venta = new Venta();
 	}
 
-	public function index($fecha,$mesa){
-		return $this->venta->index($fecha,$mesa);
+	public function index($fecha,$mesa,$datetime){
+		return $this->venta->index($fecha,$mesa,$datetime);
 	}
 
 	public function show($datos_venta){
