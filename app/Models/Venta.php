@@ -23,6 +23,8 @@ class Venta extends Connection{
                 }
                 if(!$fecha && $mesa) // solo mesa
                 {
+                        $datetime = date("Y-m-d");
+                        $fecha = $datetime; //"2022-06-30";
                         $query = "SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva,
                         mesas.numero AS mesa_numero, ventas.fecha_emision  
                         FROM ventas 
@@ -52,6 +54,8 @@ class Venta extends Connection{
                 // <?php echo $venta['id']; <?php if(isset($_GET['venta'])): <?php endif;
                 // <?php if(isset($_GET['venta'])): <?php endif;
                 // WHERE mesas.numero = $mesa WHERE ventas.fecha_emision = '$fecha'";
+
+                // == $_GET['mesa'] ? 'selected' : ''
 	}
 
         public function show($arg){

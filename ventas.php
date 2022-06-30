@@ -1,20 +1,20 @@
 <?php
     require_once 'app/Controllers/VentasController.php'; // nombre del archivo
+    require_once 'app/Controllers/TableController.php';
     use app\Controllers\VentasController; // nombre del objeto o clase
+    use app\Controllers\TableController;
 
     $venta = new VentasController();
+    $table = new TableController();
+
+    $table_numbers = $table->index();
+
     if(!empty($_GET['fecha']) || !empty($_GET['mesa'])){
         $ventas = $venta->index($_GET['fecha'],$_GET['mesa']);
     }
-    
-    
-    
-
+       
     if(!empty($_GET['venta'])){
         $detalles = $venta->show($_GET['venta']);
-    }
-
-    if(!empty($_GET['venta'])){
         $productos = $venta->productos_venta($_GET['venta']);
     }
     
@@ -98,7 +98,6 @@
                     <h2 class="text-center">VENTAS</h2>
 
 
-
                 <!-- formulario filtro -->
                     <form action="ventas.php" method="GET">
 
@@ -123,15 +122,9 @@
                                 <div class="form-group">
                                     <select name="mesa" class="form-control">
                                         <option value="">Todas</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
+                                        <?php foreach($table_numbers as $table_number):?>
+                                            <option value="<?= $table_number['numero']?>" <?= $table_number['numero']?>><?= $table_number['numero']?></option>
+                                        <?php endforeach;?>
                                     </select>
                                 </div>
                             </div>
@@ -146,7 +139,6 @@
 
                     </form>
                     <!-- fin del formulario filtro -->
-
 
 
                     <div class="list-group">

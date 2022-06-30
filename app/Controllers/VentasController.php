@@ -13,6 +13,7 @@ class VentasController {
 	protected $venta;
     protected $show;
 	protected $productos_venta;
+	//protected $date_time;
 
 	public function __construct(){  
 
