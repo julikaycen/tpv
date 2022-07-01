@@ -11,12 +11,16 @@
 
     if(!empty($_GET['fecha']) || !empty($_GET['mesa'])){
         $ventas = $venta->index($_GET['fecha'],$_GET['mesa'],date("Y-m-d"));
+        
     }
        
     if(!empty($_GET['venta'])){
         $detalles = $venta->show($_GET['venta']);
         $productos = $venta->productos_venta($_GET['venta']);
     }
+
+    $tickets_ingresos = $venta->tickets_ingresos($_GET['fecha']);
+    $media_martes = $venta->media_martes();
     
 ?>
 
@@ -45,7 +49,7 @@
             <div class="col-12 col-lg-7 col-xl-8 order-lg-1 mt-5">
 
             
-                <section>
+                <section> <!-- SHOW PRODUCTOS -->
                     
                     <h2 class="text-center">VENTA <?php if(isset($_GET['venta'])):?><?php echo $detalles['numero_ticket'];?><?php endif;?></h2>
                     
@@ -89,7 +93,7 @@
                             </tbody>    
                         </table>
                     <?php endif;?>
-                </section>
+                </section> <!-- FIN DE SHOW PRODUCTOS -->
             
             </div>
 
@@ -141,6 +145,8 @@
                     <!-- fin del formulario filtro -->
 
 
+
+                    <!-- DATOS VENTAS TICKETS -->
                     <div class="list-group">
                     <?php if(!empty($_GET['fecha']) || !empty($_GET['mesa'])):?>
                         <?php foreach($ventas as $venta):?> 
@@ -165,25 +171,13 @@
                             <?php endif;?>
                         <?php endforeach;?>    
                     <?php endif;?>
-                        <!-- <a class="sale-item list-group-item list-group-item-action" href="ventas.php?venta=2" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Ticket: 202206280002</h5>
-                                <small>Hora:  17:58</small>
-                                <small>Mesa: 1</small>
-                            </div>
-                            <p class="mb-1">30 €</p>
-                        </a>
+                    <!-- FIN DATOS VENTAS TICKETS -->
 
-                        <a class="sale-item list-group-item list-group-item-action" href="ventas.php?venta=3" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Ticket: 202206280003</h5>
-                                <small>Hora: 18:00</small>
-                                <small>Mesa: 3</small>
-                            </div>
-                            <p class="mb-1">72 €</p>
-                        </a> -->
 
-                        <!-- PRECIO TOTAL TICKETS DEL DIA -->
+                        
+
+
+                    <!-- PRECIO TOTAL TICKETS DEL DIA y MEDIA DE LOS MARTES-->
                     <div class="row mt-3">
                         <div class="col">
                             <div class="bg-secondary" id="refresh-price">
@@ -195,22 +189,26 @@
                                         <h5 class="text-center text-white mb-0 pt-1">Media del día</h5>
                                     </div>
                                     <div class="row justify-content-between g-0">
-                                        <div class="col">
-                                            <h5 class="text-center text-white mb-0 pb-1">
-                                                <?php if(isset($total_ticket['base_imponible']) && $total_ticket['base_imponible'] != null): ?>
-                                                    <?= $total_ticket['base_imponible']; ?> €
-                                                <?php else: ?>
-                                                    0 €
-                                                <?php endif; ?>
+                                        <div class="col">  <!--TOTAL VENTAS TICKETS DIA -->
+                                            <h5 class="text-center text-white mb-0 pb-1"> 
+                                                <?php foreach($tickets_ingresos as $tp):?>
+                                                    <?php if(isset($tp['suma']) && $tp['suma'] != null): ?>
+                                                        <?= $tp['suma']; ?> €
+                                                    <?php else: ?>
+                                                        0 €
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
                                             </h5>
                                         </div>
-                                        <div class="col">
+                                        <div class="col"> <!--MEDIA DE TODOS LOS MARTES -->
                                             <h5 class="text-center text-white mb-0 border-start pb-1">
-                                                <?php if(isset($total_ticket['iva']) && $total_ticket['iva'] != null): ?>
-                                                    <?= $total_ticket['rest']; ?> €
-                                                <?php else: ?>
-                                                    0 €
-                                                <?php endif; ?>
+                                                <?php foreach($media_martes as $mm):?>
+                                                    <?php if(isset($mm['media']) && $mm['media'] != null): ?>
+                                                        <?= $mm['media'] ?> €
+                                                    <?php else: ?>
+                                                        0 €
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
                                             </h5>
                                         </div>
                                     </div>

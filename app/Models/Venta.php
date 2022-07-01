@@ -87,6 +87,35 @@ class Venta extends Connection{
 
                 return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro     
         }
+
+        public function tickets_ingresos($datetime){
+                $query = "SELECT SUM(precio_total) AS suma FROM ventas 
+                        WHERE fecha_emision = '$datetime'";
+
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+
+                return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
+        }
+
+        public function media_martes(){
+                $query = "SELECT SUM(precio_total) AS media , DAYNAME(fecha_emision) AS dia
+                FROM ventas 
+                WHERE DAYNAME(fecha_emision) = 'Tuesday'
+                GROUP BY fecha_emision";
+                          
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+
+                return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
+
+                // SELECT SUM(precio_total), DAYNAME(fecha_emision) AS suma FROM ventas GROUP BY fecha_emision
+                // WHERE DAYNAME(fecha_emision) = 'Tuesday'
+                
+                // SELECT AVG(precio_total) AS media, count(precio_total) AS p_total, DAYNAME(fecha_emision) AS dia FROM ventas 
+                //WHERE DAYNAME(fecha_emision) = 'Tuesday'
+                //GROUP BY dia
+        }
 }
 
 ?>
