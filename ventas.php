@@ -11,7 +11,7 @@
 
     if(!empty($_GET['fecha']) || !empty($_GET['mesa'])){
         $ventas = $venta->index($_GET['fecha'],$_GET['mesa'],date("Y-m-d"));
-        
+        //$tickets_ingresos = $venta->tickets_ingresos($_GET['fecha']);
     }
        
     if(!empty($_GET['venta'])){
@@ -19,7 +19,10 @@
         $productos = $venta->productos_venta($_GET['venta']);
     }
 
-    $tickets_ingresos = $venta->tickets_ingresos($_GET['fecha']);
+    if(isset($_GET['fecha'])){
+        $tickets_ingresos = $venta->tickets_ingresos($_GET['fecha']);
+    }
+    
     $media_martes = $venta->media_martes();
     
 ?>
@@ -190,7 +193,8 @@
                                     </div>
                                     <div class="row justify-content-between g-0">
                                         <div class="col">  <!--TOTAL VENTAS TICKETS DIA -->
-                                            <h5 class="text-center text-white mb-0 pb-1"> 
+                                            <h5 class="text-center text-white mb-0 pb-1">
+                                            <?php if(!empty($_GET['fecha']) || !empty($_GET['mesa'])):?>
                                                 <?php foreach($tickets_ingresos as $tp):?>
                                                     <?php if(isset($tp['suma']) && $tp['suma'] != null): ?>
                                                         <?= $tp['suma']; ?> €
@@ -198,6 +202,7 @@
                                                         0 €
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
+                                            <?php endif; ?>
                                             </h5>
                                         </div>
                                         <div class="col"> <!--MEDIA DE TODOS LOS MARTES -->

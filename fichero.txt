@@ -1,7 +1,1 @@
-SELECT ventas.id,ventas.numero_ticket,ventas.hora_emision,ventas.mesa_id,ventas.precio_total, ventas.metodo_pago_id, ventas.precio_total_base, ventas.precio_total_iva,
-                mesas.numero AS mesa_numero, ventas.fecha_emision  
-                FROM ventas 
-                INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id
-                INNER JOIN mesas ON ventas.mesa_id = mesas.id
-                
-                WHERE ventas.fecha_emision = '2022-06-29'
+addProduct

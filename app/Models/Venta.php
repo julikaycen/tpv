@@ -118,7 +118,7 @@ class Venta extends Connection{
         //     INNER JOIN mesas ON mesas.id = ventas.mesa_id
         //     WHERE ventas.activo = 1 AND fecha_emision = '$date'
         //     AND mesas.numero = $table_number
-        
+
         }
 }
 

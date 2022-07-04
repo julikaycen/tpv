@@ -28,42 +28,7 @@
                 <?php endforeach;?>
             <?php endif;?>
         
-            <!-- <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/heineken.jpeg">
-                <div class="flex-grow-1"><span class="categoria-prod">Bebida alcohólica</span>
-                    <h4 class="nombre-prod mb-0">Cerveza Heineken</h4><span class="medida-prod">33 ml.</span>
-                </div>
-                <p class="precio-prod">3.50 €</p>
-            </li>
-            <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/nestea.jpeg">
-                <div class="flex-grow-1"><span class="categoria-prod">Refrescos</span>
-                    <h4 class="nombre-prod mb-0">Nestea</h4><span class="medida-prod">33 ml.</span>
-                </div>
-                <p class="precio-prod">2.90 €</p>
-            </li>
-            <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/patatilla-jamon.jpeg">
-                <div class="flex-grow-1"><span class="categoria-prod">Aperitivos</span>
-                    <h4 class="nombre-prod mb-0">Bolsa patatilla sabor jamón</h4><span class="medida-prod">150 gr.</span>
-                </div>
-                <p class="precio-prod">3.00 €</p>
-            </li>
-            <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/copa-vino.jpeg">
-                <div class="flex-grow-1"><span class="categoria-prod">Bebida alcohólica</span>
-                    <h4 class="nombre-prod mb-0">Copa de vino</h4><span class="medida-prod">20 ml.</span>
-                </div>
-                <p class="precio-prod">4.50 €</p>
-            </li>
-            <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket shadow-sm" src="assets/img/cocacola.png">
-                <div class="flex-grow-1"><span class="categoria-prod">Refrescos</span>
-                    <h4 class="nombre-prod mb-0">Coca-Cola</h4><span class="medida-prod">20 ml.</span>
-                </div>
-                <p class="precio-prod">3.50 €</p>
-            </li>
-            <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/cafe-con-leche.jpeg">
-                <div class="flex-grow-1"><span class="categoria-prod">Bebida caliente</span>
-                    <h4 class="nombre-prod mb-0">Café con leche</h4><span class="medida-prod">25 ml.</span>
-                </div>
-                <p class="precio-prod">2.10 €</p>
-            </li> -->
+            
         
         </ul>
         <div class="row mt-3">
@@ -82,13 +47,13 @@
                     </div>
                     <div class="row justify-content-between g-0">
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1"><?=implode($precios[0]);?></h5>
+                            <h5 class="text-center text-white mb-0 pb-1">precio base</h5>
                         </div>
                         <div class="col">
                             <h5 class="text-center text-white mb-0 border-start pb-1">21%</h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 bg-dark pb-1"><?=implode($totales[0]);?></h5>
+                            <h5 class="text-center text-white mb-0 bg-dark pb-1">precio total</h5>
                         </div>
                     </div>
                 </div>

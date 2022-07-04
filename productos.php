@@ -52,46 +52,14 @@
                     </div>
                     <div class="row mb-5">
                     <?php foreach($cats as $cat):?>
-                        <div class="add-product col-6 col-md-4 gy-4">
-                            <a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal">
+                        <div class="add-product col-6 col-md-4 gy-4" data-table="<?php echo $_GET['mesa'] ?>" data-price="<?= $cat['precio_id']; ?>">
+                            <a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button">
                                 <img src="<?=$cat['imagen_url'];?>">
                             </a>
                             <h5 class="text-center mb-0"><?=$cat['nombre'];?></h5>
                         </div>
                     <?php endforeach;?>
-                        <!-- <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/ensaladilla.jpeg"></a>
-                            <h5 class="text-center mb-0">Ensaladilla</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/albondigas.jpeg"></a>
-                            <h5 class="text-center mb-0">Albondigas</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/calamar-romana.jpeg"></a>
-                            <h5 class="text-center mb-0">Calamar romana</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/callos.jpeg"></a>
-                            <h5 class="text-center mb-0">Callos madrileña</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/carne-en-salsa.jpeg"></a>
-                            <h5 class="text-center mb-0">Carne en salsa</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/champiñones.jpeg"></a>
-                            <h5 class="text-center mb-0">Champiñones</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/chipirones.jpeg"></a>
-                            <h5 class="text-center mb-0">Chipirones</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/mejillones.jpeg"></a>
-                            <h5 class="text-center mb-0">Mejillones</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/patatas-alioli.jpeg"></a>
-                            <h5 class="text-center mb-0">Patatas alioli</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/picapica.jpeg"></a>
-                            <h5 class="text-center mb-0">Pica-pica</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/patatas-bravas.jpeg"></a>
-                            <h5 class="text-center mb-0">Patatas bravas</h5>
-                        </div> -->
+                   
                     </div>
                 </section>
             </div>
@@ -100,23 +68,7 @@
 
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="medidas">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Tamaño Nombre del producto</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row align-items-center flex-column">
-                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-primary w-100" type="button">PEQUEÑO</button></div>
-                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-success w-100" type="button">MEDIANO</button></div>
-                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-danger w-100" type="button">GRANDE</button></div>
-                    </div>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
-            </div>
-        </div>
-    </div>
+   
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="dist/main.js"></script>
 </body>
