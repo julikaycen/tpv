@@ -52,7 +52,10 @@
                     </div>
                     <div class="row mb-5">
                     <?php foreach($cats as $cat):?>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="<?=$cat['imagen_url'];?>"></a>
+                        <div class="add-product col-6 col-md-4 gy-4">
+                            <a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal">
+                                <img src="<?=$cat['imagen_url'];?>">
+                            </a>
                             <h5 class="text-center mb-0"><?=$cat['nombre'];?></h5>
                         </div>
                     <?php endforeach;?>
@@ -115,6 +118,7 @@
         </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="module" src="dist/main.js"></script>
 </body>
 
 </html>

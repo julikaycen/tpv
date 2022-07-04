@@ -109,12 +109,16 @@ class Venta extends Connection{
 
                 return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
 
-                // SELECT SUM(precio_total), DAYNAME(fecha_emision) AS suma FROM ventas GROUP BY fecha_emision
-                // WHERE DAYNAME(fecha_emision) = 'Tuesday'
-                
-                // SELECT AVG(precio_total) AS media, count(precio_total) AS p_total, DAYNAME(fecha_emision) AS dia FROM ventas 
-                //WHERE DAYNAME(fecha_emision) = 'Tuesday'
-                //GROUP BY dia
+        //         SELECT ROUND(SUM(precio_total),2) AS total,
+        //     (SELECT ROUND(AVG(total),2) AS media
+        //     FROM(SELECT SUM(precio_total) AS total, fecha_emision AS fecha FROM ventas WHERE activo = 1 GROUP BY fecha_emision)subconsulta
+        //     WHERE DAYNAME(fecha) = DAYNAME('$date')
+        //     GROUP BY DAYNAME(fecha)) AS media
+        //     FROM ventas
+        //     INNER JOIN mesas ON mesas.id = ventas.mesa_id
+        //     WHERE ventas.activo = 1 AND fecha_emision = '$date'
+        //     AND mesas.numero = $table_number
+        
         }
 }
 
