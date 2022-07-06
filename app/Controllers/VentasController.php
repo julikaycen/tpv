@@ -11,17 +11,12 @@ use app\Models\Venta; // modelo - objeto
 class VentasController {
 
 	protected $venta;
-    protected $show;
-	protected $productos_venta;
-	protected $tickets_ingresos;
+    
 
 	public function __construct(){  
 
 		$this->venta = new Venta();
-		$this->show = new Venta();
-		$this->productos_venta = new Venta();
-		$this->tickets_ingresos = new Venta();
-		$this->media_martes = new Venta();
+		
 	}
 
 	public function index($fecha,$mesa,$datetime){

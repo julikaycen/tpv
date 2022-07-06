@@ -11,7 +11,7 @@ class Producto extends Connection{
 
 	public function index($categ){ 
         $query = "SELECT productos.imagen_url, productos.nombre, precios.id AS precio_id FROM productos 
-        INNER JOIN precios ON precios.producto_id = productos.id;
+        INNER JOIN precios ON precios.producto_id = productos.id
         WHERE categoria_id = $categ and precios.vigente = 1";
         
         $stmt = $this->pdo->prepare($query);

@@ -1,26 +1,25 @@
-// export ->  va a ser importado por alguien
-export let renderProducts = () => {
+
+export let renderTickets = () => {
+
+    let deleteProducts = document.querySelectorAll(".delete-product");// se pone un punto al referirse a una clase
 
 
-    let addProducts = document.querySelectorAll(".add-product"); // se pone un punto al referirse a una clase
-        
 
-    addProducts.forEach(addProduct => {
-        addProduct.addEventListener("click", (event) => {
+    deleteProducts.forEach(deleteProduct => {
+        deleteProduct.addEventListener("click", (event) => {
             
             let sendPostRequest = async () => { // async - await
 
-                // json inicio
+                // jason inicio
                 let data = {}; // data es una variable que almacena el json
-                data["route"] = 'addProduct';
-                data["price_id"] = addProduct.dataset.price; // el valor seria data-price de productos.php
-                data["table_id"] = addProduct.dataset.table;
+                data["route"] = 'deleteProduct';
+                data["ticket_id"] = deleteProduct.dataset.ticketid; // el valor seria data-price de productos.php
     
                 let response = await fetch('web.php', {
                     headers: {
                         'Accept': 'application/json',
                     },
-                    method: 'POST',
+                    method: 'DELETE',
                     body: JSON.stringify(data)
                 }) // json fin
                 .then(response => {
@@ -41,7 +40,4 @@ export let renderProducts = () => {
         }); 
     });
 
-    
-        
-
-};
+}

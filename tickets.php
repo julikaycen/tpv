@@ -14,12 +14,12 @@
 
 <div class="col-12 col-lg-5 col-xl-4 mt-5">
     <aside>
-        <h2 class="text-center">TICKET MESA <?php echo $num_mesa = isset($_GET['mesa']) ? $_GET['mesa'] : "-";?></h2>
+        <h2 class="text-center">TICKET MESA <?php echo $num_mesa = isset($_GET['mesa']) ? $_GET['mesa'] : "---";?></h2>
         <ul class="list-group shadow mt-4">
 
             <?php if(isset($tickets)):?>
                 <?php foreach($tickets as $ticket):?> 
-                    <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
+                    <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="delete-product la la-close" data-ticketid="<?php $ticket['ticket_id']; ?>"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
                         <div class="flex-grow-1"><span class="categoria-prod"><?=$ticket['categoria'];?></span>
                             <h4 class="nombre-prod mb-0"><?=$ticket['pro_nombre'];?></h4>
                         </div>
@@ -47,13 +47,13 @@
                     </div>
                     <div class="row justify-content-between g-0">
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1">precio base</h5>
+                            <h5 class="text-center text-white mb-0 pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo $precios['precio']?><?php endif;?></h5>
                         </div>
                         <div class="col">
                             <h5 class="text-center text-white mb-0 border-start pb-1">21%</h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 bg-dark pb-1">precio total</h5>
+                            <h5 class="text-center text-white mb-0 bg-dark pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo $totales['total_final']?><?php endif;?></h5>
                         </div>
                     </div>
                 </div>
