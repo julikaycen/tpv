@@ -5,3 +5,4 @@ import {renderTickets} from './tickets.js';
 
 
 renderProducts();
+renderTickets();

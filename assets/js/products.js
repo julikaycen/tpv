@@ -24,7 +24,7 @@ export let renderProducts = () => {
                     body: JSON.stringify(data)
                 }) // json fin
                 .then(response => {
-                
+                    location.reload(true);
                     if (!response.ok) throw response;
     
                     return response.json();

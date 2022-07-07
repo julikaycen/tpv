@@ -1,10 +1,12 @@
 <?php
     require_once 'app/Controllers/TableController.php'; // nombre del archivo
     use app\Controllers\TableController; // nombre del objeto o clase
+    
 
     $mesa = new TableController();
     $mesas = $mesa->index();
 
+    
     
 ?>
 

@@ -8,14 +8,12 @@
     use app\Controllers\TableController;
     use app\Controllers\VentasController;
 
-
     header("Content-Type: application/json");
-    $json = json_decode(file_get_contents('php://input')); // coje todo lo que envia javascript de las llamadas(funcion) FETCH() por metodo POST
 
     if(isset($_GET['data'])){
         $json = json_decode($_GET['data']);
     }else{
-        $json = json_decode(file_get_contents('php://input')); 
+        $json = json_decode(file_get_contents('php://input')); // coje todo lo que envia javascript de las llamadas(funcion) FETCH() por metodo POST
     }
     
 
@@ -23,7 +21,7 @@
         switch($json->route) {
 
             case 'addProduct':
-
+                
                 $ticket = new TicketsController();
                 $mesa = new TableController();
                 $venta = new VentasController();
@@ -46,23 +44,20 @@
 
             case 'deleteProduct':
 
-                $ticket = new TicketsController();
-                //$mesa = new TableController();
-                //$venta = new VentasController();
+                $ticket = new TicketsController(); 
 
-                $productoBorrado = $ticket->deleteProduct($json->ticket_id);
-                //$updateMesa = $mesa->updateState($json->table_id, 1);
-                //$totales = $ticket->get_total($json->table_id);
-                
+                $ticket->deleteProduct($json->id);
+                $totales = $ticket->get_total($json->table_id);
+
 
                 $response = array(
                     'status' => 'ok',
-                    'productoBorrado' => $productoBorrado
-                    
+                    'totales' => $totales
                 );
 
                 echo json_encode($response);
 
+                
                 break;
             }
 

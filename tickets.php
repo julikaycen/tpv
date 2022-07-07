@@ -19,7 +19,7 @@
 
             <?php if(isset($tickets)):?>
                 <?php foreach($tickets as $ticket):?> 
-                    <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="delete-product la la-close" data-ticketid="<?php $ticket['ticket_id']; ?>"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
+                    <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-ticketid="<?= $ticket['ticket']; ?>"  type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
                         <div class="flex-grow-1"><span class="categoria-prod"><?=$ticket['categoria'];?></span>
                             <h4 class="nombre-prod mb-0"><?=$ticket['pro_nombre'];?></h4>
                         </div>

@@ -16,8 +16,9 @@ class Ticket extends Connection{
                         productos.nombre AS pro_nombre,
                         productos.imagen_url AS pro_img,
                         precios.precio_base AS precio_pro,
-                        productos_categorias.nombre AS categoria
-                        tickets.id AS ticket_id
+                        productos_categorias.nombre AS categoria,
+                        tickets.id AS ticket
+                        
 
                         FROM tickets
 
@@ -25,10 +26,20 @@ class Ticket extends Connection{
                         INNER JOIN productos ON precios.producto_id = productos.id
                         INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
                         
-                        WHERE tickets.mesa_id = $mesaID";
+                        WHERE tickets.mesa_id = $mesaID
+                        AND tickets.activo = 1";
+                        
 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
+
+                //
+                $query2 =  "SELECT count(*) AS cont_tickets FROM tickets WHERE estado = 1 and mesa_id = $mesaID";
+                $stmt2 = $this->pdo->prepare($query2);
+                $result2 = $stmt2->execute(); // contador
+                var_dump($result2);
+                //
+
 
                 return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro
         }
@@ -58,16 +69,15 @@ class Ticket extends Connection{
 
         public function deleteProduct($ticket_id) 
         {
-                var_dump($ticket_id);
-                file_put_contents("fichero.txt", $ticket_id);
+                
                 $query =  "UPDATE tickets SET activo = 0, actualizado = NOW() WHERE id = $ticket_id";
-                file_put_contents("fichero.txt", $query);
 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
-
-                return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+                return 'ok';
         }
+        
 
 
         // base imponible

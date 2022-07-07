@@ -1,1 +1,1 @@
-Hola mundo
+UPDATE tickets SET activo = 0, actualizado = NOW() WHERE id = 41
