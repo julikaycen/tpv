@@ -19,10 +19,11 @@ class Table extends Connection{
 	}
 
         
-        public function updateState($table_id,$state) // 
+        public function updateState($table_id, $state) // 
         {
 
                 $query =  "UPDATE mesas SET estado = $state, actualizado = NOW() WHERE id = $table_id";
+
                 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();

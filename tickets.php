@@ -6,7 +6,6 @@
 
     if(!empty($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
-        $precios = $ticket->get_prize($_GET['mesa']);
         $totales = $ticket->get_total($_GET['mesa']);
     }
 ?>
@@ -19,7 +18,7 @@
 
             <?php if(isset($tickets)):?>
                 <?php foreach($tickets as $ticket):?> 
-                    <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-ticketid="<?= $ticket['ticket']; ?>"  type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
+                    <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-table="<?php echo $_GET['mesa'] ?>" data-ticketid="<?= $ticket['ticket']; ?>"  type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?=$ticket['pro_img'];?>">
                         <div class="flex-grow-1"><span class="categoria-prod"><?=$ticket['categoria'];?></span>
                             <h4 class="nombre-prod mb-0"><?=$ticket['pro_nombre'];?></h4>
                         </div>
@@ -47,7 +46,7 @@
                     </div>
                     <div class="row justify-content-between g-0">
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo $precios['precio']?><?php endif;?></h5>
+                            <h5 class="text-center text-white mb-0 pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo  $totales['precio']?><?php endif;?></h5>
                         </div>
                         <div class="col">
                             <h5 class="text-center text-white mb-0 border-start pb-1">21%</h5>
@@ -71,7 +70,7 @@
                                 <div class="modal-body">
                                     <p class="text-center text-muted">Está a punto de borrar el pedido sin ser cobrado. ¿Está completamente seguro de realizar esta acción?</p>
                                 </div>
-                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="btn btn-success" type="button">ELIMINAR</button></div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="delete-all btn btn-success" type="button">ELIMINAR</button></div>
                             </div>
                         </div>
                     </div>

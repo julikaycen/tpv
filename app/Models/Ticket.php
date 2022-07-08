@@ -19,7 +19,6 @@ class Ticket extends Connection{
                         productos_categorias.nombre AS categoria,
                         tickets.id AS ticket
                         
-
                         FROM tickets
 
                         INNER JOIN precios ON tickets.precio_id = precios.id
@@ -34,10 +33,10 @@ class Ticket extends Connection{
                 $result = $stmt->execute();
 
                 //
-                $query2 =  "SELECT count(*) AS cont_tickets FROM tickets WHERE estado = 1 and mesa_id = $mesaID";
-                $stmt2 = $this->pdo->prepare($query2);
-                $result2 = $stmt2->execute(); // contador
-                var_dump($result2);
+                // $query2 =  "SELECT count(*) AS cont_tickets FROM tickets WHERE activo = 1 and mesa_id = $mesaID";
+                // $stmt2 = $this->pdo->prepare($query2); // 
+                // $result2 = $stmt2->execute(); // bool
+                                                
                 //
 
 
@@ -77,37 +76,49 @@ class Ticket extends Connection{
         
                 return 'ok';
         }
-        
-
-
-        // base imponible
-        public function get_prize($mesaID)
+        public function deleteAll($ticket_id) 
         {
                 
-                $query = "SELECT
-                        
-                        SUM(precios.precio_base) AS precio
-                        FROM tickets
-                        INNER JOIN precios ON tickets.precio_id = precios.id
-                        WHERE tickets.mesa_id = $mesaID";
-        
+                $query =  "UPDATE tickets SET activo = 0, actualizado = NOW() WHERE id = $ticket_id";
+
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
-
-                return $stmt->fetch(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro
+        
+                return 'ok';
         }
         
+
+
+        // // base imponible
+        // public function get_prize($mesaID)
+        // {
+                
+        //         $query = "SELECT
+                        
+        //                 SUM(precios.precio_base) AS precio
+        //                 FROM tickets
+        //                 INNER JOIN precios ON tickets.precio_id = precios.id
+        //                 WHERE tickets.mesa_id = $mesaID";
+        
+        //         $stmt = $this->pdo->prepare($query);
+        //         $result = $stmt->execute();
+
+        //         return $stmt->fetch(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro
+        // }
+        
+
         // total con iva incluido
         
         public function get_total($mesaID)
         {
                 
-                $query = "SELECT
-                        
-                        (SUM(precios.precio_base)*0.21)+SUM(precios.precio_base) AS total_final
+                $query = "SELECT 
+                        (SUM(precios.precio_base)*0.21)+SUM(precios.precio_base) AS total_final, SUM(precios.precio_base) AS precio
                         FROM tickets
                         INNER JOIN precios ON tickets.precio_id = precios.id
-                        WHERE tickets.mesa_id = $mesaID";
+                        WHERE tickets.mesa_id = $mesaID
+                        AND tickets.activo = 1
+                        AND venta_id IS NULL";
                         
         
                 $stmt = $this->pdo->prepare($query);

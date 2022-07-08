@@ -1,1 +1,1 @@
-UPDATE tickets SET activo = 0, actualizado = NOW() WHERE id = 41
+UPDATE mesas SET estado = 0, actualizado = NOW() WHERE id = 8

@@ -45,10 +45,37 @@
             case 'deleteProduct':
 
                 $ticket = new TicketsController(); 
+                $mesa = new TableController();
 
                 $ticket->deleteProduct($json->id);
                 $totales = $ticket->get_total($json->table_id);
 
+                if($totales['precio'] == null){
+                    $updateMesa = $mesa->updateState($json->table_id, 0);
+                }
+
+                $response = array(
+                    'status' => 'ok',
+                    'totales' => $totales
+                );
+
+                echo json_encode($response);
+
+                
+                break;
+            
+
+            case 'deleteAll':
+
+                $ticket = new TicketsController(); 
+                $mesa = new TableController();
+
+                $ticket->deleteProduct($json->id);
+                $totales = $ticket->get_total($json->table_id);
+
+                if($totales['precio'] == null){
+                    $updateMesa = $mesa->updateState($json->table_id, 0);
+                }
 
                 $response = array(
                     'status' => 'ok',
