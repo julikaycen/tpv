@@ -76,10 +76,10 @@ class Ticket extends Connection{
         
                 return 'ok';
         }
-        public function deleteAll($ticket_id) 
+        public function deleteAll($table_id) 
         {
                 
-                $query =  "UPDATE tickets SET activo = 0, actualizado = NOW() WHERE id = $ticket_id";
+                $query =  "UPDATE tickets SET activo = 0, actualizado = NOW() WHERE mesa_id = $table_id and venta_id IS NULL";
 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();

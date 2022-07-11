@@ -109,15 +109,24 @@ class Venta extends Connection{
 
                 return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
 
-        //         SELECT ROUND(SUM(precio_total),2) AS total,
-        //     (SELECT ROUND(AVG(total),2) AS media
-        //     FROM(SELECT SUM(precio_total) AS total, fecha_emision AS fecha FROM ventas WHERE activo = 1 GROUP BY fecha_emision)subconsulta
-        //     WHERE DAYNAME(fecha) = DAYNAME('$date')
-        //     GROUP BY DAYNAME(fecha)) AS media
-        //     FROM ventas
-        //     INNER JOIN mesas ON mesas.id = ventas.mesa_id
-        //     WHERE ventas.activo = 1 AND fecha_emision = '$date'
-        //     AND mesas.numero = $table_number
+        
+
+        }
+
+        public function cobra_venta($metodo_pago) // OJO!
+        {
+                
+                $query = "INSERT INTO ventas (precio_total_base, metodo_pago_id) VALUES ($metodo_pago)";
+
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+
+                //return 'ok';
+                return $stmt->fetch(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
+        }
+
+        public function update_venta_tickets()
+        {
 
         }
 }

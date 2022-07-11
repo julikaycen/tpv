@@ -10,7 +10,7 @@
 
     $mesas = $mesa->index();
     if(!empty($_GET['mesa'])){
-        //$tickets = $ticket->index($_GET['mesa']);
+        $tickets = $ticket->index($_GET['mesa']);
         //$precios = $ticket->get_prize($_GET['mesa']);
         $totales = $ticket->get_total($_GET['mesa']);
     }

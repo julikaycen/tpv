@@ -70,15 +70,40 @@
                 $ticket = new TicketsController(); 
                 $mesa = new TableController();
 
-                $ticket->deleteProduct($json->id);
+                $ticket->deleteAll($json->table_id);
                 $totales = $ticket->get_total($json->table_id);
 
-                if($totales['precio'] == null){
-                    $updateMesa = $mesa->updateState($json->table_id, 0);
-                }
+                $updateMesa = $mesa->updateState($json->table_id, 0);
+                
 
                 $response = array(
                     'status' => 'ok',
+                    'totales' => $totales
+                );
+
+                echo json_encode($response);
+
+                
+                break;
+            
+
+            case 'cobraVenta': // OJO!, id de venta -> actualizar campo venta_id en tabla 'ventas'
+
+                $ticket = new TicketsController(); 
+                $mesa = new TableController();
+                $venta = new VentasController();
+
+                $totales = $ticket->get_total($json->table_id);// los totales los cojo de aqui
+                $updateMesa = $mesa->updateState($json->table_id, 0);
+                $numeroTicket = $venta->cobra_venta($json->numero_ticket);
+                //$precioBase = $ticket->get_total();
+                $metodoPago = $venta->cobra_venta($json->metodo_pago);
+                
+
+                $response = array(
+                    'status' => 'ok',
+                    'numeroTicket' => $numeroTicket,
+                    'metodoPago' => $metodoPago,
                     'totales' => $totales
                 );
 

@@ -15,6 +15,7 @@ export let renderTickets = () => {
                 data["route"] = 'deleteProduct';
                 data["id"] = deleteProduct.dataset.ticketid; 
                 data["table_id"] = deleteProduct.dataset.table; 
+                
                 //
                 let response = await fetch('web.php', {
                     headers: {
@@ -53,7 +54,7 @@ export let renderTickets = () => {
 
                 let data = {}; // data es una variable que almacena el json
                 data["route"] = 'deleteAll';
-                data["id"] = deleteAll.dataset.ticketid; 
+                //data["id"] = deleteAll.dataset.ticketid; 
                 data["table_id"] = deleteAll.dataset.table; 
                 //
                 let response = await fetch('web.php', {

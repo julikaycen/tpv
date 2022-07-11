@@ -38,6 +38,10 @@ class VentasController {
 	public function media_martes(){ // se hace con DAYNAME(fecha)
 		return $this->venta->media_martes();
 	}
+
+	public function cobra_venta($metodo_pago){
+		return $this->venta->cobra_venta($metodo_pago);
+	}
 }
 
 ?>

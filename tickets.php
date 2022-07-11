@@ -1,8 +1,11 @@
 <?php
     require_once 'app/Controllers/TicketsController.php'; // nombre del archivo
     use app\Controllers\TicketsController; // nombre del objeto o clase
+    require_once 'app/Controllers/VentasController.php'; // nombre del archivo
+    use app\Controllers\VentasController; // nombre del objeto o clase
     
     $ticket = new TicketsController();
+    $venta = new VentaSController();
 
     if(!empty($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
@@ -46,7 +49,7 @@
                     </div>
                     <div class="row justify-content-between g-0">
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo  $totales['precio']?><?php endif;?></h5>
+                            <h5 class="text-center text-white mb-0 pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo $totales['precio']?><?php endif;?></h5>
                         </div>
                         <div class="col">
                             <h5 class="text-center text-white mb-0 border-start pb-1">21%</h5>
@@ -70,7 +73,8 @@
                                 <div class="modal-body">
                                     <p class="text-center text-muted">Está a punto de borrar el pedido sin ser cobrado. ¿Está completamente seguro de realizar esta acción?</p>
                                 </div>
-                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="delete-all btn btn-success" type="button">ELIMINAR</button></div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="delete-all btn btn-success" data-table="<?php echo $_GET['mesa'] ?>" type="button">ELIMINAR</button></div>
+                                
                             </div>
                         </div>
                     </div>
@@ -86,9 +90,11 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row align-items-center flex-column">
-                                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-primary w-100" type="button">EFECTIVO</button></div>
-                                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-success w-100" type="button">TARJETA CRÉDITO</button></div>
-                                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-danger w-100" type="button">BIZUM</button></div>
+                                        <!-- FORMAS DE PAGO -->
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-primary w-100"  data-metodopago = "1" data-preciobase="<?php $totales['precio_total_base'];?>" type="button">EFECTIVO</button></div>
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-success w-100"  data-metodopago = "2" type="button">TARJETA CRÉDITO</button></div>
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-danger w-100"  data-metodopago = "3" type="button">BIZUM</button></div>
+                                        <!-- FIN FORMAS DE PAGO -->
                                     </div>
                                 </div>
                                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button></div>

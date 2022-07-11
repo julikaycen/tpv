@@ -31,8 +31,8 @@ class TicketsController {
 	public function deleteProduct($ticket_id){
 		return $this->ticket->deleteProduct($ticket_id);
 	}
-	public function deleteAll($ticket_id){
-		return $this->ticket->deleteAll($ticket_id);
+	public function deleteAll($table_id){
+		return $this->ticket->deleteAll($table_id);
 	}
 }
 
