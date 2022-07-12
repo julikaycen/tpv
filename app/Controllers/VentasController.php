@@ -39,8 +39,10 @@ class VentasController {
 		return $this->venta->media_martes();
 	}
 
-	public function cobra_venta($metodo_pago){
-		return $this->venta->cobra_venta($metodo_pago);
+	public function cobra_venta($totales, $table_id, $metodo_pago){
+
+		// calcular el numero de ticket aqui
+		return $this->venta->cobra_venta($totales, $table_id, $metodo_pago);
 	}
 }
 

@@ -10,6 +10,7 @@
     if(!empty($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
         $totales = $ticket->get_total($_GET['mesa']);
+        
     }
 ?>
 
@@ -91,7 +92,7 @@
                                 <div class="modal-body">
                                     <div class="row align-items-center flex-column">
                                         <!-- FORMAS DE PAGO -->
-                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-primary w-100"  data-metodopago = "1" data-preciobase="<?php $totales['precio_total_base'];?>" type="button">EFECTIVO</button></div>
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-primary w-100"  data-metodopago = "1" type="button">EFECTIVO</button></div>
                                         <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-success w-100"  data-metodopago = "2" type="button">TARJETA CRÉDITO</button></div>
                                         <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-danger w-100"  data-metodopago = "3" type="button">BIZUM</button></div>
                                         <!-- FIN FORMAS DE PAGO -->

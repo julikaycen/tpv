@@ -113,16 +113,19 @@ class Venta extends Connection{
 
         }
 
-        public function cobra_venta($metodo_pago) // OJO!
+        public function cobra_venta($totales, $table_id, $metodo_pago)
         {
-                
-                $query = "INSERT INTO ventas (precio_total_base, metodo_pago_id) VALUES ($metodo_pago)";
+                $precio_base = $totales['precio'];
+                $precio_total = $totales['total_final'];
+                $query = "INSERT INTO ventas (precio_total_base,precio_total,metodo_pago_id) 
+                        VALUES ($precio_base,$precio_total,$metodo_pago)";
 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
 
                 //return 'ok';
                 return $stmt->fetch(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
+                // ".$totales['iva'] ."
         }
 
         public function update_venta_tickets()

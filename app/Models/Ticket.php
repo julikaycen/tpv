@@ -112,8 +112,7 @@ class Ticket extends Connection{
         public function get_total($mesaID)
         {
                 
-                $query = "SELECT 
-                        (SUM(precios.precio_base)*0.21)+SUM(precios.precio_base) AS total_final, SUM(precios.precio_base) AS precio
+                $query = "SELECT (SUM(precios.precio_base)*0.21)+SUM(precios.precio_base) AS total_final, SUM(precios.precio_base) AS precio
                         FROM tickets
                         INNER JOIN precios ON tickets.precio_id = precios.id
                         WHERE tickets.mesa_id = $mesaID

@@ -94,18 +94,15 @@
                 $venta = new VentasController();
 
                 $totales = $ticket->get_total($json->table_id);// los totales los cojo de aqui
+                $numeroTicket = $venta->cobra_venta($totales, $json->table_id, $json->metodo_pago);
                 $updateMesa = $mesa->updateState($json->table_id, 0);
-                $numeroTicket = $venta->cobra_venta($json->numero_ticket);
-                //$precioBase = $ticket->get_total();
-                $metodoPago = $venta->cobra_venta($json->metodo_pago);
-                
 
                 $response = array(
                     'status' => 'ok',
                     'numeroTicket' => $numeroTicket,
-                    'metodoPago' => $metodoPago,
                     'totales' => $totales
                 );
+                //'metodoPago' => $metodoPago,
 
                 echo json_encode($response);
 
