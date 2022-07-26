@@ -24,6 +24,22 @@ class TableController {
 		return $this->table->updateState($table_id,$state);
 	}
 
+	public function store($id,$numero,$ubicacion,$pax){
+		
+		return $this->table->store($id,$numero,$ubicacion,$pax);
+	}
+
+	public function show($id){
+		
+		return $this->table->show($id);
+	}
+
+	public function delete($id){
+		
+		return $this->table->delete($id);
+	}
+
+
 	
 }
 

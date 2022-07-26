@@ -3,10 +3,12 @@
     require_once 'app/Controllers/TicketsController.php';
     require_once 'app/Controllers/TableController.php';
     require_once 'app/Controllers/VentasController.php';
+    require_once 'app/Controllers/ivaController.php';
   
     use app\Controllers\TicketsController;
     use app\Controllers\TableController;
     use app\Controllers\VentasController;
+    use app\Controllers\ivaController;
 
     header("Content-Type: application/json");
 
@@ -93,16 +95,14 @@
                 $mesa = new TableController();
                 $venta = new VentasController();
 
-                $totales = $ticket->get_total($json->table_id);// los totales los cojo de aqui
-                $numeroTicket = $venta->cobra_venta($totales, $json->table_id, $json->metodo_pago);
-                $updateMesa = $mesa->updateState($json->table_id, 0);
+                $totales = $ticket->get_total($json->mesa_id);// los totales los cojo de aqui
+                $sale_id = $venta->cobra_venta($totales, $json->mesa_id, $json->metodo_pago);
+                $ticket->closeTicket($sale_id, $json->mesa_id );
+                $updateMesa = $mesa->updateState($json->mesa_id, 0);
 
                 $response = array(
-                    'status' => 'ok',
-                    'numeroTicket' => $numeroTicket,
-                    'totales' => $totales
+                    'status' => 'ok'
                 );
-                //'metodoPago' => $metodoPago,
 
                 echo json_encode($response);
 
@@ -110,8 +110,80 @@
                 break;
             }
 
+            // crear funciones en controlador y en el modelo
+            case 'storeTable': //
 
-    } else {
+                $table = new TableController();
+                $new_table = $table->store($json->id, $json->numero, $json->ubicacion, $json->pax); // COINCIDEN CON LOS NAMES DE CADA INPUT
+                // &new_venta, $new_produt, etc...
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id, // SOLO TENDRA VALOR SI SE ACTUALIZA
+                    'newElement' => $new_table // NUEVO REGISTRO DE LA TABLA MESA
+                );
+
+                echo json_encode($response);
+
+                break;
+           
+            case 'showTable': //
+
+                $table = new TableController();
+                $table = $table->show($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'element' => $table,
+                );
+
+                echo json_encode($response);
+
+                break;
+           
+            case 'deleteTable': //
+                $table = new TableController();
+                $table->delete($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id
+                );
+
+                echo json_encode($response);
+
+                break;
+
+
+            case 'storeIva': //
+
+                $iva = new ivaController();
+                $new_iva = $iva->store($json->id, $json->tipo, $json->multiplicador); // COINCIDEN CON LOS NAMES DE CADA INPUT
+                // &new_venta, $new_produt, etc...
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id, // SOLO TENDRA VALOR SI SE ACTUALIZA
+                    'newElement' => $new_iva // NUEVO REGISTRO DE LA TABLA IVA
+                );
+    
+                echo json_encode($response);
+    
+                break;                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            } else {
         echo json_encode(array('error' => 'No action'));
     }    
 ?>

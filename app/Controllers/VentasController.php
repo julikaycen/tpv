@@ -41,9 +41,24 @@ class VentasController {
 
 	public function cobra_venta($totales, $table_id, $metodo_pago){
 
+		$new_ticket = $this->newTicketNumber();
 		// calcular el numero de ticket aqui
-		return $this->venta->cobra_venta($totales, $table_id, $metodo_pago);
+		return $this->venta->cobra_venta($totales, $table_id, $metodo_pago, $new_ticket);
 	}
+
+	public function newTicketNumber(){
+       
+        $date = date("Ymd");
+        $sale = $this->venta->lastTicketNumber();
+           
+        if(isset($sale['numero_ticket']) && strpos($sale['numero_ticket'], $date) !== false){
+            $ticket_number = $sale['numero_ticket'] + 1;
+        } else {
+            $ticket_number = $date . "0001";
+        };
+       
+        return $ticket_number;
+    }
 }
 
 ?>

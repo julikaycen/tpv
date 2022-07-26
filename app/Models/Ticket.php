@@ -26,6 +26,7 @@ class Ticket extends Connection{
                         INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
                         
                         WHERE tickets.mesa_id = $mesaID
+                        AND tickets.venta_id IS NULL
                         AND tickets.activo = 1";
                         
 
@@ -88,6 +89,16 @@ class Ticket extends Connection{
         }
         
 
+        public function closeTicket($sale_id, $table_id){
+                
+                $query =  "UPDATE tickets SET venta_id = $sale_id, actualizado = NOW() WHERE mesa_id = $table_id and activo = 1 and venta_id IS NULL";
+
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+        
+                return 'ok';
+        }
+
 
         // // base imponible
         // public function get_prize($mesaID)
@@ -111,14 +122,24 @@ class Ticket extends Connection{
         
         public function get_total($mesaID)
         {
-                
-                $query = "SELECT (SUM(precios.precio_base)*0.21)+SUM(precios.precio_base) AS total_final, SUM(precios.precio_base) AS precio
+                /*
+                $query = "SELECT (SUM(precios.precio_base)*0.21)+SUM(precios.precio_base) AS total_final, SUM(, SUM(precios.precio_base) AS precio
                         FROM tickets
                         INNER JOIN precios ON tickets.precio_id = precios.id
                         WHERE tickets.mesa_id = $mesaID
                         AND tickets.activo = 1
-                        AND venta_id IS NULL";
-                        
+                        AND venta_id IS NULL"; */
+        
+                $query =  "SELECT ROUND(SUM(precios.precio_base),2) AS precio, ROUND(SUM(precios.precio_base * iva.multiplicador),2) AS total_final,
+                ROUND(SUM(precios.precio_base * iva.multiplicador) - SUM(precios.precio_base),2) AS iva_total , iva.tipo AS iva
+                FROM tickets
+                INNER JOIN precios ON tickets.precio_id = precios.id
+                INNER JOIN iva ON precios.iva_id = iva.id
+                WHERE tickets.activo = 1 AND tickets.venta_id IS NULL AND tickets.mesa_id = ".$mesaID."
+                GROUP BY iva.tipo";
+
+                file_put_contents("fichero.txt", $query);
+
         
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();

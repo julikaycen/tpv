@@ -34,6 +34,10 @@ class TicketsController {
 	public function deleteAll($table_id){
 		return $this->ticket->deleteAll($table_id);
 	}
+
+	public function closeTicket($sale_id, $table_id){
+		return $this->ticket->closeTicket($sale_id, $table_id);
+	}
 }
 
 ?>

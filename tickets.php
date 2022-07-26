@@ -10,7 +10,6 @@
     if(!empty($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
         $totales = $ticket->get_total($_GET['mesa']);
-        
     }
 ?>
 
@@ -42,7 +41,13 @@
                             <h5 class="text-center text-white mb-0 pt-1">B. Imponible</h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 border-start pt-1">IVA</h5>
+                            <h5 class="text-center text-white mb-0 border-start pt-1">IVA
+                                <?php if(!empty($totales['iva'])):?>
+                                    (<?php echo $totales['iva']?>%)
+                                <?php else:?>
+                                    ()
+                                <?php endif;?>
+                            </h5>
                         </div>
                         <div class="col">
                             <h5 class="text-center text-white mb-0 bg-dark pt-1">TOTAL</h5>
@@ -50,13 +55,31 @@
                     </div>
                     <div class="row justify-content-between g-0">
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo $totales['precio']?><?php endif;?></h5>
+                            <h5 class="text-center text-white mb-0 pb-1">
+                                <?php if(!empty($totales['precio'])):?>
+                                    <?php echo $totales['precio']?>€
+                                <?php else:?>
+                                    0
+                                <?php endif;?>
+                            </h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 border-start pb-1">21%</h5>
+                            <h5 class="text-center text-white mb-0 border-start pb-1">
+                            <?php if(!empty($totales['iva_total'])):?>
+                                    <?php echo $totales['iva_total']?> €
+                                <?php else:?> 
+                                    0
+                                <?php endif;?>
+                            </h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 bg-dark pb-1"><?php if(!empty($_GET['mesa'])):?><?php echo $totales['total_final']?><?php endif;?></h5>
+                            <h5 class="text-center text-white mb-0 bg-dark pb-1">
+                                <?php if(!empty($totales['total_final'])):?>
+                                    <?php echo $totales['total_final']?> €
+                                <?php else:?> 
+                                    0
+                                <?php endif;?>
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -92,9 +115,9 @@
                                 <div class="modal-body">
                                     <div class="row align-items-center flex-column">
                                         <!-- FORMAS DE PAGO -->
-                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-primary w-100"  data-metodopago = "1" type="button">EFECTIVO</button></div>
-                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-success w-100"  data-metodopago = "2" type="button">TARJETA CRÉDITO</button></div>
-                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-danger w-100"  data-metodopago = "3" type="button">BIZUM</button></div>
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-primary w-100" data-mesaid="<?php echo $_GET['mesa'];?>" data-metodopago="1" type="button">EFECTIVO</button></div>
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-success w-100" data-mesaid="<?php echo $_GET['mesa'];?>" data-metodopago="2" type="button">TARJETA CRÉDITO</button></div>
+                                        <div class="col-6 d-lg-flex m-2"><button class="cobra-venta btn btn-danger w-100"  data-mesaid="<?php echo $_GET['mesa'];?>" data-metodopago="3" type="button">BIZUM</button></div>
                                         <!-- FIN FORMAS DE PAGO -->
                                     </div>
                                 </div>

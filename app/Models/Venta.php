@@ -109,23 +109,31 @@ class Venta extends Connection{
 
                 return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
 
-        
-
         }
 
-        public function cobra_venta($totales, $table_id, $metodo_pago)
+        public function lastTicketNumber()
         {
-                $precio_base = $totales['precio'];
-                $precio_total = $totales['total_final'];
-                $query = "INSERT INTO ventas (precio_total_base,precio_total,metodo_pago_id) 
-                        VALUES ($precio_base,$precio_total,$metodo_pago)";
+                $query =  "SELECT numero_ticket FROM ventas ORDER BY id DESC LIMIT 1";
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function cobra_venta($totales, $table_id, $metodo_pago, $nuevo_ticket)
+        {
+
+
+                $query = "INSERT INTO ventas (numero_ticket, precio_total_base, precio_total_iva, precio_total,metodo_pago_id, mesa_id, fecha_emision, hora_emision, activo, creado, actualizado) 
+                 VALUES (".$nuevo_ticket.",".$totales['precio'].",".$totales['iva_total'].",".$totales['total_final'].",".$metodo_pago.",".$table_id.",CURDATE(), CURTIME(), 1, NOW(), NOW() )";
 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
 
-                //return 'ok';
-                return $stmt->fetch(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro 
-                // ".$totales['iva'] ."
+                $id = $this->pdo->lastInsertId();
+
+                return $id;
+                
         }
 
         public function update_venta_tickets()
