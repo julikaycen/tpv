@@ -43,7 +43,7 @@
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                        <button type="button" class="filter-form-button btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#filterArticle">Filtrar</button>
+                            <button type="button" class="filter-form-button btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#filterArticle">Filtrar</button>
                             <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir mesa</button>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                     <form action="admin-mesas.php" method="GET">
                         <!------------ FILTRAR  EXAMEN------------>
                         <div class="mb-3">
-                            <label for="categoria_id" class="form-label">Categoría del producto</label>
+                            <!-- <label for="categoria_id" class="form-label">Categoría del producto</label> -->
                             <select class="form-select" aria-label="Default select example" name="ubicacion">
                                 <option value="">Todas</option>
                                 <option value="interna">Interna</option>
