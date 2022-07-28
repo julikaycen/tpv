@@ -6,7 +6,12 @@
 	use app\Controllers\TableController;
 
 	$table = new TableController();
-	$tables = $table->index();
+    // EXAMEN - se ob tiene la ubicacion con get para poder usarlo en el metodo 'filtra_ubicacion'
+    if(!empty($_GET['ubicacion'])){
+        $tables = $table->filtra_ubicacion($_GET['ubicacion']); // examen
+    }else{
+        $tables = $table->index();
+    }
 
 ?>
 
@@ -38,6 +43,7 @@
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
+                        <button type="button" class="filter-form-button btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#filterArticle">Filtrar</button>
                             <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir mesa</button>
                         </div>
                     </div>
@@ -191,6 +197,38 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
                     <!-- boton de confirmacion de eliminar -->
                     <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deleteTable">ELIMINAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div id="filterArticle" class="modal fade" tabindex="-1" aria-labelledby="filterArticleLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterArticleLabel">FILTRAR PRODUCTOS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="admin-mesas.php" method="GET">
+                        <!------------ FILTRAR  EXAMEN------------>
+                        <div class="mb-3">
+                            <label for="categoria_id" class="form-label">Categoría del producto</label>
+                            <select class="form-select" aria-label="Default select example" name="ubicacion">
+                                <option value="">Todas</option>
+                                <option value="interna">Interna</option>
+                                <option value="terraza">Terraza</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

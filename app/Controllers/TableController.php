@@ -39,6 +39,12 @@ class TableController {
 		return $this->table->delete($id);
 	}
 
+	// examen - se crea la funcion necesaria con un parametro que usaremos para obtener el parametro del filtro(terraza, interna o todas)
+	public function filtra_ubicacion($id)
+	{
+		return $this->table->filtra_ubicacion($id);
+	}
+
 
 	
 }

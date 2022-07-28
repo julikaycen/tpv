@@ -59,6 +59,16 @@ class Table extends Connection{
                 return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro
 	}
 
+        // examen - metodo con la query que selecciona todo y le asignamos el parametro en ubicacion , que cojeremos con $_GET en 'admin-mesas'
+        public function filtra_ubicacion($ubic)
+        {
+                $query = "SELECT * FROM mesas WHERE ubicacion='$ubic'";
+
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+
+                return $stmt->fetchALL(PDO::FETCH_ASSOC); // fecth -> cuando es solo 1 registro
+        }
 
 }
 

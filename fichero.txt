@@ -1,7 +1,1 @@
-SELECT ROUND(SUM(precios.precio_base),2) AS precio, ROUND(SUM(precios.precio_base * iva.multiplicador),2) AS total_final,
-                ROUND(SUM(precios.precio_base * iva.multiplicador) - SUM(precios.precio_base),2) AS iva_total , iva.tipo AS iva
-                FROM tickets
-                INNER JOIN precios ON tickets.precio_id = precios.id
-                INNER JOIN iva ON precios.iva_id = iva.id
-                WHERE tickets.activo = 1 AND tickets.venta_id IS NULL AND tickets.mesa_id = 4
-                GROUP BY iva.tipo
+SELECT * FROM mesas WHERE ubicacion='terraza'
